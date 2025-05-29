@@ -28,6 +28,7 @@ const StoryAvatar: FC<StoryAvatarProps> = ( {
   nameTextProps,
   renderAvatar,
   avatarBorderRadius,
+  renderAvatarOverlay
 } ) => {
 
   const loaded = useSharedValue( false );
@@ -74,6 +75,7 @@ const StoryAvatar: FC<StoryAvatarProps> = ( {
             testID="storyAvatarImage"
             onLoad={onLoad}
           />
+          { renderAvatarOverlay ? renderAvatarOverlay() : null }
         </TouchableOpacity>
       </View>
       {Boolean( showName ) && (
