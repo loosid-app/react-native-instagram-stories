@@ -13,6 +13,7 @@ export interface StoryItemProps {
   animationDuration?: number;
   renderContent?: () => ReactNode;
   renderFooter?: () => ReactNode;
+  headerTitle?: string
 }
 
 export interface InstagramStoryProps {

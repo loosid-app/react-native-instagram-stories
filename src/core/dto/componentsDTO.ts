@@ -140,9 +140,13 @@ export interface StoryHeaderProps {
   closeColor: string;
   headerStyle?: ViewStyle;
   headerContainerStyle?: ViewStyle;
+  stories: InstagramStoryProps['stories'];
+  active?: SharedValue<boolean>;
+  activeStory: SharedValue<string | undefined>;
   onClose: () => void;
   renderStoryHeader?: () => ReactNode;
   onStoryHeaderPress?: () => void;
+  renderPlayControlButton?: () => ReactNode;
 }
 
 export interface IconProps {
