@@ -64,6 +64,7 @@ export interface StoryModalProps {
   hideOverlayViewOnLongPress?: boolean;
   loopingStories?: 'none' | 'all' | 'onlyLast';
   statusBarTranslucent?: boolean;
+  modalOverlayComponent?: ReactNode;
   onLoad: () => void;
   onShow?: ( id: string ) => void;
   onHide?: ( id: string ) => void;

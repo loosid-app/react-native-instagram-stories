@@ -20,7 +20,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
   backgroundColor, videoProps, closeIconColor, modalAnimationDuration = STORY_ANIMATION_DURATION,
   storyAnimationDuration = STORY_ANIMATION_DURATION, hideElementsOnLongPress, loopingStories = 'none',
   statusBarTranslucent, onLoad, onShow, onHide,
-  onSeenStoriesChange, onSwipeUp, onStoryStart, onStoryEnd, footerComponent, ...props
+  onSeenStoriesChange, onSwipeUp, onStoryStart, onStoryEnd, footerComponent, modalOverlayComponent, ...props
 }, ref ) => {
 
   const [ visible, setVisible ] = useState( false );
@@ -508,6 +508,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
           {footerComponent && footerComponent}
         </Animated.View>
       </GestureHandler>
+      {modalOverlayComponent && modalOverlayComponent}
     </Modal>
   );
 
