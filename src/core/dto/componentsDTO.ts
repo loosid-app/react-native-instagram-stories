@@ -152,6 +152,7 @@ export interface StoryContentProps {
   stories: InstagramStoryProps['stories'];
   active: SharedValue<boolean>;
   activeStory: SharedValue<string | undefined>;
+  storyContentStyle?: ViewStyle;
 }
 
 export interface StoryListProps extends InstagramStoryProps, StoryHeaderProps {
@@ -173,6 +174,7 @@ export interface StoryListProps extends InstagramStoryProps, StoryHeaderProps {
   hideElements: SharedValue<boolean>;
   hideOverlayViewOnLongPress?: boolean;
   videoDuration?: number;
+  storyContentStyle?: ViewStyle;
   onLoad: ( duration?: number ) => void;
 }
 

@@ -6,7 +6,7 @@ import { runOnJS, useAnimatedReaction } from 'react-native-reanimated';
 import { StoryContentProps } from '../../core/dto/componentsDTO';
 import ContentStyles from './Content.styles';
 
-const StoryContent: FC<StoryContentProps> = ( { stories, active, activeStory } ) => {
+const StoryContent: FC<StoryContentProps> = ( { stories, active, activeStory, storyContentStyle } ) => {
 
   const [ storyIndex, setStoryIndex ] = useState( 0 );
 
@@ -37,7 +37,7 @@ const StoryContent: FC<StoryContentProps> = ( { stories, active, activeStory } )
 
   const content = useMemo( () => stories[storyIndex]?.renderContent?.(), [ storyIndex ] );
 
-  return content ? <View style={ContentStyles.container} pointerEvents="box-none">{content}</View> : null;
+  return content ? <View style={[ContentStyles.container, storyContentStyle]} pointerEvents="box-none">{content}</View> : null;
 
 };
 
