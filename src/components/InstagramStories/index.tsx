@@ -34,6 +34,7 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
   isVisible = false,
   hideAvatarList = false,
   avatarBorderRadius,
+  onPressStoryItem,
   ...props
 }, ref ) => {
 
@@ -54,6 +55,8 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
       modalRef.current?.show( id );
 
     }
+
+    onPressStoryItem?.(id)
 
   };
 
