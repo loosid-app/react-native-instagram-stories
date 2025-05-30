@@ -110,6 +110,7 @@ const StoryImage: FC<StoryImageProps> = ( {
             />
           ) : (
             <Image
+              key={data.data.id}
               source={data.data.source}
               style={[ { width: WIDTH, aspectRatio: 0.5626 }, imageStyles ]}
               resizeMode="contain"
