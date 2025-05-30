@@ -24,3 +24,5 @@ export const STORY_AVATAR_SIZE = 26;
 export const STORY_ANIMATION_DURATION = 800;
 export const ANIMATION_DURATION = 10000;
 export const LONG_PRESS_DURATION = 500;
+
+export const HORIZONTAL_SWIPE_FACTOR = 10;

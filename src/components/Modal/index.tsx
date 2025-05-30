@@ -8,7 +8,7 @@ import Animated, {
   useDerivedValue, useSharedValue, withTiming,
 } from 'react-native-reanimated';
 import {
-  HEIGHT, LONG_PRESS_DURATION, STORY_ANIMATION_DURATION, WIDTH,
+  HEIGHT, LONG_PRESS_DURATION, STORY_ANIMATION_DURATION, WIDTH, HORIZONTAL_SWIPE_FACTOR
 } from '../../core/constants';
 import { GestureContext, StoryModalProps, StoryModalPublicMethods } from '../../core/dto/componentsDTO';
 import GestureHandler from './gesture';
@@ -317,7 +317,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
         const diff = x.value - ctx.x;
         let newX;
 
-        if ( Math.abs( diff ) < WIDTH / 4 ) {
+        if ( Math.abs( diff ) < WIDTH / HORIZONTAL_SWIPE_FACTOR ) {
 
           newX = ctx.x;
 
