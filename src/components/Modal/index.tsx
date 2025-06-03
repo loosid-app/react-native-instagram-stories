@@ -129,6 +129,15 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
     'worklet';
 
     const newUserIndex = stories.findIndex( ( story ) => story.id === id );
+
+    if ( newUserIndex < 0) {
+
+      onClose();
+
+      return;
+
+    }
+
     const newX = newUserIndex * WIDTH;
 
     x.value = animated ? withTiming( newX, { duration: storyAnimationDuration } ) : newX;
@@ -428,7 +437,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
     goToPreviousStory: toPreviousStory,
     goToNextStory: toNextStory,
     goToSpecificStory: ( newUserId, index ) => scrollTo( newUserId, true, false, undefined, index ),
-  } ), [ userId.value, currentStory.value ] );
+  } ), [ stories, userId.value, currentStory.value ] );
 
   useEffect( () => {
 
