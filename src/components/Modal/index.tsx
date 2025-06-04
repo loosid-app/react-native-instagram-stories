@@ -20,7 +20,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
   backgroundColor, videoProps, closeIconColor, modalAnimationDuration = STORY_ANIMATION_DURATION,
   storyAnimationDuration = STORY_ANIMATION_DURATION, hideElementsOnLongPress, loopingStories = 'none',
   statusBarTranslucent, onLoad, onShow, onHide,
-  onSeenStoriesChange, onSwipeUp, onStoryStart, onStoryEnd, footerComponent, modalOverlayComponent, ...props
+  onSeenStoriesChange, onSwipeUp, onStoryStart, onStoryEnd, onPauseStatusChange, footerComponent, modalOverlayComponent, ...props
 }, ref ) => {
 
   const [ visible, setVisible ] = useState( false );
@@ -275,7 +275,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 
       ctx.x = x.value;
       ctx.userId = userId.value;
-      paused.value = true;
+      // paused.value = true; // Disabled for allowing tapping controls
 
     },
     onActive: ( e, ctx ) => {
@@ -466,6 +466,16 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
     () => animation.value,
     ( res, prev ) => res !== prev && toNextStory( res === 1 ),
     [ animation.value ],
+  );
+
+  useAnimatedReaction(
+    () => paused.value,
+    ( res, prev ) => {
+      if ( res !== prev && onPauseStatusChange ) {
+       runOnJS( onPauseStatusChange )( res );
+      }
+    },
+    [ paused.value ],
   );
 
   return (

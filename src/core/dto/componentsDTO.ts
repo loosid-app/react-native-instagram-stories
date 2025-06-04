@@ -72,6 +72,7 @@ export interface StoryModalProps {
   onSwipeUp?: ( userId?: string, storyId?: string ) => void;
   onStoryStart?: ( userId?: string, storyId?: string ) => void;
   onStoryEnd?: ( userId?: string, storyId?: string ) => void;
+  onPauseStatusChange?:( pasued: boolean ) => void;
 }
 
 export type StoryModalPublicMethods = {
