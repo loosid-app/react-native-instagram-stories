@@ -11,7 +11,7 @@ import { StoryHeaderProps } from '../../core/dto/componentsDTO';
 import Close from '../Icon/close';
 
 const StoryHeader: FC<StoryHeaderProps> = ( {
-  avatarSource, name, onClose, avatarSize, textStyle, closeColor, headerStyle,
+  avatarSource, name, onClose, avatarSize, textStyle, closeColor, headerStyle, ownStory,
   headerContainerStyle, renderStoryHeader, onStoryHeaderPress, renderPlayControlButton, stories, active, activeStory
 } ) => {
 
@@ -58,7 +58,14 @@ const StoryHeader: FC<StoryHeaderProps> = ( {
 
   }
 
-  const headerString = useMemo( () => stories?.[storyIndex]?.headerTitle || name, [ storyIndex, name ] );
+ const { headerString, storyId } = useMemo( () => {
+  
+    const currentStory = stories?.[storyIndex];
+
+    return {
+    headerString: currentStory?.headerTitle || name,
+    storyId: currentStory?.id
+  }}, [ storyIndex, name ] );
 
   return (
     <View style={[
@@ -75,7 +82,7 @@ const StoryHeader: FC<StoryHeaderProps> = ( {
         {Boolean( headerString ) && <Text style={textStyle}>{headerString}</Text>}
       </Pressable>
       
-       {renderPlayControlButton && renderPlayControlButton()}
+      {renderPlayControlButton && renderPlayControlButton( storyId, ownStory )}
 
       <TouchableOpacity
         onPress={onClose}

@@ -144,10 +144,11 @@ export interface StoryHeaderProps {
   stories: InstagramStoryProps['stories'];
   active?: SharedValue<boolean>;
   activeStory: SharedValue<string | undefined>;
+  ownStory?: boolean;
   onClose: () => void;
   renderStoryHeader?: () => ReactNode;
   onStoryHeaderPress?: () => void;
-  renderPlayControlButton?: () => ReactNode;
+  renderPlayControlButton?: ( storyId?:string, ownStory?:boolean ) => ReactNode;
 }
 
 export interface IconProps {
