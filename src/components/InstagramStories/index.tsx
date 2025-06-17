@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useSharedValue } from 'react-native-reanimated';
 import { Image } from 'react-native';
-import { clearProgressStorage, getProgressStorage, setProgressStorage } from '../../core/helpers/storage';
+import { clearProgressStorage, getProgressStorage, replaceStoryProgress, setProgressStorage } from '../../core/helpers/storage';
 import { InstagramStoriesProps, InstagramStoriesPublicMethods } from '../../core/dto/instagramStoriesDTO';
 import { ProgressStorageProps } from '../../core/dto/helpersDTO';
 import {
@@ -17,6 +17,7 @@ import StoryAvatarList from '../AvatarList';
 const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStoriesProps>( ( {
   stories,
   saveProgress = false,
+  lastSeenStories = {},
   avatarBorderColors = DEFAULT_COLORS,
   avatarSeenBorderColors = SEEN_LOADER_COLORS,
   avatarSize = AVATAR_SIZE,
@@ -68,13 +69,20 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
 
   const onStoriesChange = async () => {
 
-    seenStories.value = await ( saveProgress ? getProgressStorage() : {} );
+    // const localSeenStories = await ( saveProgress ? getProgressStorage() : {} );
+    
+    // const mergedSeenStories = { ...localSeenStories, ...lastSeenStories };
+
+    seenStories.value = lastSeenStories;
+
+    await replaceStoryProgress( lastSeenStories )
 
     const promises = stories.map( ( story ) => {
 
       const seenStoryIndex = story.stories.findIndex(
         ( item ) => item.id === seenStories.value[story.id],
       );
+
       const seenStory = story.stories[seenStoryIndex + 1] || story.stories[0];
 
       if ( !seenStory ) {
@@ -86,7 +94,7 @@ const InstagramStories = forwardRef<InstagramStoriesPublicMethods, InstagramStor
       return seenStory.mediaType !== 'video' && ( seenStory.source as any )?.uri ? Image.prefetch( ( seenStory.source as any )?.uri ).catch(()=> {
         // Ignore image prefetch fail
        return true
-     }) : true;
+      }) : true;
 
     } );
 
