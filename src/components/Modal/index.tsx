@@ -67,6 +67,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
     );
     lastViewed.value = {};
     cancelAnimation( animation );
+    animation.value = 0;
 
   };
 
