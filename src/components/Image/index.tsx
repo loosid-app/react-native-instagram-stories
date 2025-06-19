@@ -79,8 +79,14 @@ const StoryImage: FC<StoryImageProps> = ( {
 
   const onContentLoad = ( newDuration?: number ) => {
 
-    const animationDuration = ( data?.data?.mediaType === 'video' ? videoDuration : undefined ) ?? data.data?.animationDuration ?? newDuration;
+    const isVideoStory = data?.data?.mediaType === 'video';
+
+    const animationDuration = ( isVideoStory ? videoDuration : undefined ) ?? data.data?.animationDuration ?? newDuration;
     duration.value = animationDuration;
+    
+    if ( isVideoStory && !animationDuration ) {
+        return;
+    }
 
     loading.value = false;
 
@@ -89,6 +95,20 @@ const StoryImage: FC<StoryImageProps> = ( {
       onLoad( animationDuration );
 
     }
+
+  };
+
+  const onVideoStart = () => {
+
+    const isVideoStory = data?.data?.mediaType === 'video';
+
+    if ( !isVideoStory ) {
+
+      return;
+
+    }
+
+    loading.value = false;
 
   };
 
@@ -103,6 +123,7 @@ const StoryImage: FC<StoryImageProps> = ( {
             <StoryVideo
               onLoad={onContentLoad}
               onLayout={onImageLayout}
+              onVideoStart={onVideoStart}
               source={data.data.source}
               paused={isPaused}
               isActive={isActive}

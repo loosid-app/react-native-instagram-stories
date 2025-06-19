@@ -7,7 +7,7 @@ import { StoryVideoProps } from '../../core/dto/componentsDTO';
 import { WIDTH } from '../../core/constants';
 
 const StoryVideo: FC<StoryVideoProps> = ( {
-  source, paused, isActive, onLoad, onLayout, ...props
+  source, paused, isActive, onLoad, onLayout, onVideoStart, ...props
 } ) => {
 
   try {
@@ -49,6 +49,7 @@ const StoryVideo: FC<StoryVideoProps> = ( {
         repeat={false}
         onLoad={( { duration }: { duration: number } ) => onLoad( duration * 1000 )}
         onLayout={( e: LayoutChangeEvent ) => onLayout( e.nativeEvent.layout.height )}
+        onReadyForDisplay={onVideoStart}
       />
     );
 

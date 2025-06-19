@@ -192,4 +192,5 @@ export interface StoryVideoProps {
   isActive: SharedValue<boolean>;
   onLoad: ( duration: number ) => void;
   onLayout: ( height: number ) => void;
+  onVideoStart: () => void;
 }
