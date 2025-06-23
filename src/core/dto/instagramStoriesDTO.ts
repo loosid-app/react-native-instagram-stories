@@ -30,6 +30,7 @@ export interface InstagramStoryProps {
 export interface InstagramStoriesProps {
   stories: InstagramStoryProps[];
   saveProgress?: boolean;
+  lastSeenStories?: { [key:string]: string };
   avatarBorderColors?: string[];
   avatarSeenBorderColors?: string[];
   avatarSize?: number;

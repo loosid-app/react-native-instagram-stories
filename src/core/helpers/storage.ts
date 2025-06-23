@@ -56,3 +56,20 @@ export const setProgressStorage = async ( user: string, lastSeen: string ) => {
   }
 
 };
+
+export const replaceStoryProgress = async ( progress : { [ key : string]: string} ) => {
+
+  try {
+
+    const AsyncStorage = require( '@react-native-async-storage/async-storage' ).default;
+
+    await AsyncStorage.setItem( STORAGE_KEY, JSON.stringify( progress ) );
+
+  } catch ( error ) {
+
+    return {};
+
+  }
+
+};
+
