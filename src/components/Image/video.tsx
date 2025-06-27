@@ -49,7 +49,7 @@ const StoryVideo: FC<StoryVideoProps> = ( {
         repeat={false}
         onLoad={( { duration }: { duration: number } ) => onLoad( duration * 1000 )}
         onLayout={( e: LayoutChangeEvent ) => onLayout( e.nativeEvent.layout.height )}
-        onReadyForDisplay={onVideoStart}
+        onProgress={onVideoStart}
       />
     );
 
