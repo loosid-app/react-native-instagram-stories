@@ -126,7 +126,7 @@ const StoryImage: FC<StoryImageProps> = ( {
   return (
     <>
       <View style={ImageStyles.container}>
-        <Loader loading={loading} color={color} size={50} />
+        <Loader loading={loading} color={color} autoHide={true} size={50} />
       </View>
       <View style={[ ImageStyles.image, mediaContainerStyle ]}>
         {data.data?.source && (

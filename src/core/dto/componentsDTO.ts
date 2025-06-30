@@ -39,6 +39,7 @@ export interface StoryLoaderProps {
   loading: SharedValue<boolean>;
   color: SharedValue<string[]>;
   size?: number;
+  autoHide?: boolean;
 }
 
 export interface StoryModalProps {

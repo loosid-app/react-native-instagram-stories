@@ -17,13 +17,14 @@ const AnimatedCircle = Animated.createAnimatedComponent( Circle );
 const AnimatedSvg = Animated.createAnimatedComponent( Svg );
 
 const Loader: FC<StoryLoaderProps> = ( {
-  loading, color, size = AVATAR_SIZE + 10,
+  loading, color, autoHide = false, size = AVATAR_SIZE + 10,
 } ) => {
 
   const RADIUS = useMemo( () => ( size - STROKE_WIDTH ) / 2, [ size ] );
   const CIRCUMFERENCE = useMemo( () => RADIUS * 2 * Math.PI, [ RADIUS ] );
 
   const [ colors, setColors ] = useState<string[]>( color.value );
+  const [ loaderShown, setloaderShown ] = useState<boolean>( loading.value );
 
   const rotation = useSharedValue( 0 );
   const progress = useSharedValue( 0 );
@@ -31,13 +32,21 @@ const Loader: FC<StoryLoaderProps> = ( {
   const animatedProps = useAnimatedProps( () => ( {
     strokeDashoffset: interpolate( progress.value, [ 0, 1 ], [ 0, CIRCUMFERENCE * 2 / 3 ] ),
   } ) );
+
   const animatedStyles = useAnimatedStyle( () => ( {
     transform: [ { rotate: `${rotation.value}deg` } ],
   } ) );
 
+
   const startAnimation = () => {
 
     'worklet';
+
+    if ( autoHide ) {
+
+      runOnJS( setloaderShown )( true );
+
+    }
 
     progress.value = withRepeat( withTiming( 1, { duration: 3000 } ), -1, true );
     rotation.value = withRepeat( withTiming( 720, { duration: 3000 } ), -1, false, () => {
@@ -57,6 +66,13 @@ const Loader: FC<StoryLoaderProps> = ( {
 
     cancelAnimation( rotation );
     rotation.value = withTiming( 0 );
+
+    if ( autoHide ) {
+
+      runOnJS( setloaderShown )( false );
+
+    }
+
 
   };
 
@@ -84,6 +100,12 @@ const Loader: FC<StoryLoaderProps> = ( {
     ( res ) => onColorChange( res ),
     [ color.value ],
   );
+ 
+  if ( autoHide && !loaderShown ) { 
+
+    return null
+
+  }
 
   return (
     <AnimatedSvg width={size} height={size} style={[ animatedStyles, { zIndex: 1 } ]}>
