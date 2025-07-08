@@ -58,13 +58,13 @@ const StoryHeader: FC<StoryHeaderProps> = ( {
 
   }
 
- const { headerString, storyId } = useMemo( () => {
+ const { headerString, currentStory } = useMemo( () => {
   
     const currentStory = stories?.[storyIndex];
 
     return {
     headerString: currentStory?.headerTitle || name,
-    storyId: currentStory?.id
+    currentStory: currentStory
   }}, [ storyIndex, name ] );
 
   return (
@@ -82,7 +82,7 @@ const StoryHeader: FC<StoryHeaderProps> = ( {
         {Boolean( headerString ) && <Text style={textStyle}>{headerString}</Text>}
       </Pressable>
       
-      {renderPlayControlButton && renderPlayControlButton( storyId, ownStory )}
+      {renderPlayControlButton && renderPlayControlButton( currentStory, ownStory )}
 
       <TouchableOpacity
         onPress={onClose}

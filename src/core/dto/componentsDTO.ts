@@ -149,7 +149,7 @@ export interface StoryHeaderProps {
   onClose: () => void;
   renderStoryHeader?: () => ReactNode;
   onStoryHeaderPress?: () => void;
-  renderPlayControlButton?: ( storyId?:string, ownStory?:boolean ) => ReactNode;
+  renderPlayControlButton?: ( currentStory?:StoryItemProps, ownStory?:boolean ) => ReactNode;
 }
 
 export interface IconProps {
