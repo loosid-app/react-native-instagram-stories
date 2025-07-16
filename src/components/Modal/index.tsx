@@ -294,7 +294,7 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
           0,
           Math.min( ctx.x + -e.translationX, WIDTH * ( stories.length - 1 ) ),
         );
-
+        paused.value = true;
       }
 
     },
@@ -348,12 +348,16 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
 
       }
 
+      if ( ctx.moving ) {
+
+        paused.value = false;
+
+      }
+
       ctx.moving = false;
       ctx.vertical = false;
       ctx.userId = undefined;
       hideElements.value = false;
-      paused.value = false;
-
     },
   } );
 
