@@ -114,7 +114,8 @@ const StoryModal = forwardRef<StoryModalPublicMethods, StoryModalProps>( ( {
       }
 
     }
-
+    
+    paused.value = false;  // Make sure that paused state is reset
     animation.value = withTiming( 1, { duration: newDuration, easing: Easing.linear } );
 
   };
