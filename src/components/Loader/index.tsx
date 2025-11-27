@@ -108,7 +108,7 @@ const Loader: FC<StoryLoaderProps> = ( {
   }
 
   return (
-    <AnimatedSvg width={size} height={size} style={[ animatedStyles, { zIndex: 1 } ]}>
+    <AnimatedSvg width={size} height={size} style={animatedStyles}>
       <Defs>
         <LinearGradient id={LOADER_ID} x1="0%" y1="0%" x2="100%" y2="0%">
           {colors?.map( ( item, i ) => (
